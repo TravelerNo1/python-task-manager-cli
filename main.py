@@ -3,14 +3,14 @@ from storage import load_tasks, save_tasks
 
 
 def add_task(tasks):
-    title = input("请输入任务标题: ")
+    title = input("Enter task title: ")
     tasks.append(Task(title))
-    print("✅ 添加成功")
+    print("✅ Task added successfully!")
 
 
 def show_tasks(tasks):
     if not tasks:
-        print("暂无任务")
+        print("No tasks available.")
         return
 
     for i, task in enumerate(tasks):
@@ -22,15 +22,15 @@ def main():
     tasks = load_tasks()
 
     while True:
-        print("\n=== 任务管理系统 ===")
-        print("1. 查看任务")
-        print("2. 添加任务")
-        print("3. 标记完成")
-        print("4. 删除任务")
-        print("5. 修改任务")
-        print("0. 退出")
+        print("\n=== Task Manager ===")
+        print("1. View Tasks")
+        print("2. Add Task")
+        print("3. Mark as Completed")
+        print("4. Delete Task")
+        print("5. Edit Task")
+        print("0. Exit")
 
-        choice = input("请选择: ")
+        choice = input("Select an option: ")
 
         if choice == "1":
             show_tasks(tasks)
@@ -41,27 +41,43 @@ def main():
 
         elif choice == "3":
             show_tasks(tasks)
-            index = int(input("编号: ")) - 1
+            index = int(input("Enter task number: ")) - 1
             if 0 <= index < len(tasks):
                 tasks[index].done = True
+                print("✅ Task marked as completed.")
                 save_tasks(tasks)
+            else:
+                print("❌ Invalid task number.")
 
         elif choice == "4":
             show_tasks(tasks)
-            index = int(input("编号: ")) - 1
+            index = int(input("Enter task number to delete: ")) - 1
             if 0 <= index < len(tasks):
-                tasks.pop(index)
+                removed = tasks.pop(index)
+                print(f"🗑 Task deleted: {removed.title}")
                 save_tasks(tasks)
+            else:
+                print("❌ Invalid task number.")
 
         elif choice == "5":
             show_tasks(tasks)
-            index = int(input("编号: ")) - 1
+            index = int(input("Enter task number to edit: ")) - 1
             if 0 <= index < len(tasks):
-                tasks[index].title = input("新标题: ")
+                new_title = input("Enter new task title: ")
+                tasks[index].title = new_title
+                print("✏ Task updated successfully.")
                 save_tasks(tasks)
+            else:
+                print("❌ Invalid task number.")
 
         elif choice == "0":
             save_tasks(tasks)
+            print("Goodbye!")
             break
+
+        else:
+            print("❌ Invalid option. Please try again.")
+
+
 if __name__ == "__main__":
     main()
