@@ -37,3 +37,13 @@ task-manager/
 
 ```bash
 python main.py
+
+```
+## 実行例
+=== Task Manager ===
+1. View Tasks
+2. Add Task
+3. Mark as Completed
+4. Delete Task
+5. Edit Task
+0. Exit
