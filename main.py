@@ -5,7 +5,7 @@ from storage import load_tasks, save_tasks
 def add_task(tasks):
     title = input("Enter task title: ")
     tasks.append(Task(title))
-    print("✅ Task added successfully!")
+    print("Task added successfully!")
 
 
 def show_tasks(tasks):
@@ -14,7 +14,7 @@ def show_tasks(tasks):
         return
 
     for i, task in enumerate(tasks):
-        status = "✔" if task.done else "✘"
+        status = "Completed" if task.done else "Uncompleted"
         print(f"{i + 1}. [{status}] {task.title}")
 
 
@@ -44,20 +44,20 @@ def main():
             index = int(input("Enter task number: ")) - 1
             if 0 <= index < len(tasks):
                 tasks[index].done = True
-                print("✅ Task marked as completed.")
+                print("Task marked as completed.")
                 save_tasks(tasks)
             else:
-                print("❌ Invalid task number.")
+                print("Invalid task number.")
 
         elif choice == "4":
             show_tasks(tasks)
             index = int(input("Enter task number to delete: ")) - 1
             if 0 <= index < len(tasks):
                 removed = tasks.pop(index)
-                print(f"🗑 Task deleted: {removed.title}")
+                print(f"Task deleted: {removed.title}")
                 save_tasks(tasks)
             else:
-                print("❌ Invalid task number.")
+                print("Invalid task number.")
 
         elif choice == "5":
             show_tasks(tasks)
@@ -65,10 +65,10 @@ def main():
             if 0 <= index < len(tasks):
                 new_title = input("Enter new task title: ")
                 tasks[index].title = new_title
-                print("✏ Task updated successfully.")
+                print("Task updated successfully.")
                 save_tasks(tasks)
             else:
-                print("❌ Invalid task number.")
+                print("Invalid task number.")
 
         elif choice == "0":
             save_tasks(tasks)
@@ -76,7 +76,7 @@ def main():
             break
 
         else:
-            print("❌ Invalid option. Please try again.")
+            print("Invalid option. Please try again.")
 
 
 if __name__ == "__main__":
